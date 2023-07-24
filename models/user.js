@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const workout = require('./workout')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
@@ -8,7 +9,8 @@ const userSchema = new Schema({
       required: true
     },
     email: String,
-    avatar: String
+    avatar: String,
+    workouts: [workout.schema]
   }, {
     timestamps: true
   });
