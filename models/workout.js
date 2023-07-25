@@ -14,10 +14,7 @@ const workoutSchema = new Schema({
         type: Number,
         required: true
     },
-    description: {
-        type: String,
-        required: true
-    },
+    description: String,
     photos: [String]
 })
 

@@ -1,12 +1,11 @@
 const mongoose = require('mongoose')
 const Workout = require('./workout')
-const User = require('./user')
 const Schema = mongoose.Schema
 
 const routineSchema = new Schema({
     userId: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
+        type: String,
+        required: true
     },
     routineName: {
         type: String,

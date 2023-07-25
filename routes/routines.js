@@ -1,9 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const workoutCtrl = require('../controllers/routines')
+const routineCtrl = require('../controllers/routines')
 
-router.get('/', workoutCtrl.show)
+router.get('/', routineCtrl.show)
 
-router.get('/new', workoutCtrl.new)
+router.get('/new', routineCtrl.new)
+
+router.post('/create', routineCtrl.create)
 
 module.exports = router

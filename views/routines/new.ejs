@@ -1,5 +1,23 @@
 <%- include('../partials/header') %>
 
+  <!-- check if any available workouts -->
+    <!-- if (workouts.length)  -->
+    <form action="/routines/create" method="POST">
 
+        <label for="name">Routine Name:</label>
+        <input type="text" name="routineName" required><br>
+        <label for="routines">Select Routines To Add:</label><br>
+        <select name="workouts" id="workouts" required multiple>
+
+            <% workouts.forEach(w => { %>
+                <option value="<%= w._id %>"><%= w.name %></option>
+            <% }) %>
+
+        </select>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <a href="/workouts">Add Workout</a>
 
 <%- include('../partials/footer') %>

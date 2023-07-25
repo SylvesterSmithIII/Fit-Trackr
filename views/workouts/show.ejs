@@ -1,0 +1,36 @@
+<%- include('../partials/header') %>
+
+    <!-- check if any available workouts -->
+    <% if (workouts.length) { %>
+        <% workouts.forEach(w => { %>
+            <div>
+                <p><%= w.name %></p>
+                <p><%= w.sets %></p>
+                <p><%= w.reps %></p>
+                <% if (w.description !== "") { %>
+                    <p><%= w.description %></p>
+                <% } %>
+            </div>
+        <% }) %>
+    <% } else { %>
+        No Workouts Yet! Create One Below!
+    <% } %>
+    <form action="/workouts" method="POST">
+
+        <label for="name">Name:</label>
+        <input type="text" name="name" required>
+
+        <label for="sets">Sets:</label>
+        <input type="number" name="sets" min="1" required>
+
+        <label for="reps">Reps:</label>
+        <input type="number" name="reps" min="1" required>
+
+        <label for="description">Description:</label>
+        <input type="text" name="description">
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+<%- include('../partials/footer') %>
