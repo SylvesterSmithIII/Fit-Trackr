@@ -6,4 +6,26 @@
     <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon">
   </head>
   <body>
+    <header>
+        <h2><%= title %></h2>
+        <nav>
+            <a href="/">Home</a>
+            |
+            <a href="/auth/google">Login</a>
+
+            <% if (user) { %>
+            |
+            <a href="/routines">Go to Routines</a>
+            |
+            <a href="/logout">Logout</a>
+            <% } else {%>
+            
+            <% } %>
+
+            <!-- if user logged in display name -->
+            <% if (user) { %>
+            <h4>Hello <%= user.name %></h4>
+            <% } %>
+        </nav>
+      </header>
     <h1><%= title %></h1>

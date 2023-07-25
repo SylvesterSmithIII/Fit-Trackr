@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+
+
+    <% if (routines.length) { %>
+        <main>
+
+        <% routines.forEach(routine => { %>
+           <div>
+            <p># of Workouts <%= routine.workouts.length %></p>
+           </div>
+        <% }) %>
+
+        </main>
+
+    <% } else { %>
+
+        <p>No Routines!</p>
+        <a href="/routines/new">Create A Routine</a>
+
+    <% } %>
+
+<%- include('../partials/footer') %>
