@@ -16,12 +16,22 @@ async function show(req, res) {
     } catch (err) {
         console.log(err)
     }
-    try {
-        sample_workouts = await Sample_Workout.find({})
-    } catch (err) {
-      console.log(err)  
+    if (req.query === "") {
+        try {
+            sample_workouts = await Sample_Workout.find({})
+        } catch (err) {
+          console.log(err)  
+        }
+    } else {
+        if (req.query.name === "") delete req.query.name
+        try {
+            sample_workouts = await Sample_Workout.find(req.query)
+        } catch (err) {
+            console.log(err);
+        }
     }
-
+    
+    console.log(req.query)
     res.render('workouts/show', { title: "Workouts", workouts: currentUser.workouts, sample_workouts })
 }
 
@@ -38,5 +48,6 @@ async function create(req, res) {
     } catch (err) {
         console.log(err)
     }
+    console.log(req.body)
     res.redirect('/workouts')
 }
