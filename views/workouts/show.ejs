@@ -33,4 +33,16 @@
 
     </form>
 
+    <% sample_workouts.forEach(w => { %>
+
+        <div style="border: 1px solid black;">
+            <p><%= w.name %></p>
+            <p><%= w.description %></p>
+            <p><%= w.muscle_group %></p>
+            <p><%= w.equipment %></p>
+            <p><%= w.level %></p>
+        </div>
+
+    <% }) %>
+
 <%- include('../partials/footer') %>

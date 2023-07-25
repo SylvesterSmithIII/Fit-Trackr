@@ -15,6 +15,9 @@ const workoutSchema = new Schema({
         required: true
     },
     description: String,
+    muscle_group: String,
+    equipment: String,
+    level: String,
     photos: [String]
 })
 

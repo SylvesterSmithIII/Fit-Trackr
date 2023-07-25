@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const workout = require('../models/workout');
+const Sample_Workout = require('../models/sample_workouts')
 
 
 module.exports = {
@@ -8,12 +10,19 @@ module.exports = {
 
 async function show(req, res) {
     let currentUser
+    let sample_workouts
     try {
         currentUser = await User.findOne( { googleId: res.locals.user.googleId } )
     } catch (err) {
         console.log(err)
     }
-    res.render('workouts/show', { title: "Workouts", workouts: currentUser.workouts })
+    try {
+        sample_workouts = await Sample_Workout.find({})
+    } catch (err) {
+      console.log(err)  
+    }
+
+    res.render('workouts/show', { title: "Workouts", workouts: currentUser.workouts, sample_workouts })
 }
 
 async function create(req, res) {
