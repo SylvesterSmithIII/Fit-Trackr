@@ -10,6 +10,7 @@
                 <% if (w.description !== "") { %>
                     <p><%= w.description %></p>
                 <% } %>
+                <a href="/workouts/<%= w._id %>/edit">Edit <%= w.name %></a>
             </div>
         <% }) %>
     <% } else { %>
@@ -40,7 +41,7 @@
         <input type="text" name="name">
 
         <label for="muscle_group">Muscle Group:</label>
-        <select name="muscle_group">
+        <select name="muscle_group" multiple>
             <option value="" disabled selected>Select One</option>
             <option value="Abdominals">Abdominals</option>
             <option value="Abductors">Abductors</option>
@@ -61,7 +62,7 @@
         </select>
 
         <label for="equipment">Equipment:</label>
-        <select name="equipment">
+        <select name="equipment" multiple>
             <option value="" disabled selected>Select One</option>
             <option value="Bands">Bands</option>
             <option value="Barbell">Barbell</option>
@@ -79,7 +80,7 @@
         </select>
 
         <label for="level">Level:</label>
-        <select name="level">
+        <select name="level" multiple>
             <option value="" disabled selected>Select One</option>
             <option value="Beginner">Beginner</option>
             <option value="Intermediate">Intermediate</option>
@@ -88,15 +89,34 @@
 
         <input type="submit" value="Filter Results">
     </form>
-    <% sample_workouts.forEach(w => { %>
+    <% sample_workouts?.forEach(w => { %>
 
-        <div style="border: 1px solid black;">
-            <p><%= w.name %></p>
-            <p><%= w.description %></p>
-            <p><%= w.muscle_group %></p>
-            <p><%= w.equipment %></p>
-            <p><%= w.level %></p>
-        </div>
+        <form action="/workouts" method="POST" style="border: 1px solid black;">
+            <input type="hidden" name="name" value="<%= w.name %>" readonly>
+            <label for=""><%= w.name %></label>
+            <br>
+            <input type="hidden" name="description" value="<%= w.description %>" readonly>
+            <label for=""><%= w.description %></label>
+<br>
+
+
+            <input type="hidden" name="muscle_group" value="<%= w.muscle_group %>" readonly>
+            <label for=""><%= w.muscle_group %></label>
+        <br>
+            <input type="hidden" name="equipment" value="<%= w.equipment %>" readonly>
+            <label for=""><%= w.equipment %></label>
+<br>
+            <input type="hidden" name="level" value="<%= w.level %>" readonly>
+            <label for=""><%= w.level %></label>
+<br>
+            <label for="sets">Sets:</label>
+            <input type="number" name="sets" min="1" required>
+    <br>
+            <label for="reps">Reps:</label>
+            <input type="number" name="reps" min="1" required>
+<br>
+            <input type="submit" value="Add to Workouts">
+        </form>
 
     <% }) %>
 

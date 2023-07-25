@@ -1,11 +1,12 @@
 const User = require('../models/user');
-const workout = require('../models/workout');
+const Workout = require('../models/workout');
 const Sample_Workout = require('../models/sample_workouts')
 
 
 module.exports = {
     show,
-    create
+    create,
+    edit
 };
 
 async function show(req, res) {
@@ -30,8 +31,6 @@ async function show(req, res) {
             console.log(err);
         }
     }
-    
-    console.log(req.query)
     res.render('workouts/show', { title: "Workouts", workouts: currentUser.workouts, sample_workouts })
 }
 
@@ -48,6 +47,18 @@ async function create(req, res) {
     } catch (err) {
         console.log(err)
     }
-    console.log(req.body)
     res.redirect('/workouts')
+}
+
+async function edit(req, res) {
+    let currentUser
+    let workout
+    try {
+        currentUser = await User.findOne( { googleId: res.locals.user.googleId })
+        workout = currentUser.workouts.find(w => w._id == req.params.id)
+    } catch (err) {
+        console.log(err);
+    }
+
+    res.render('workouts/edit', { title: `Edit ${workout.name}`, workout})
 }
