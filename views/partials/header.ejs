@@ -4,13 +4,16 @@
     <title>Fit Trackr</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
   </head>
   <body>
     <header class="header">
         <% if (user) { %>
           <img src="<%= user.avatar %>" alt="user picture" class="avatar">
         <% } %>
-        <h2>Fit Trackr</h2>
+        <h1>Fit Trackr</h1>
         <nav class="nav_links">
 
           <ul>
@@ -32,4 +35,4 @@
 
         </nav>
       </header>
-    <h1><%= title %></h1>
+    <h1 class="title"><%= title %></h1>

@@ -20,7 +20,7 @@ async function index(req, res) {
 }
 
 async function newRoutine(req, res) {
-    res.render('routines/new', { title: "Create Routine", workouts: req.user.workouts })
+    res.render('routines/new', { title: "Create A New Routine", workouts: req.user.workouts })
 }
 
 async function create(req, res) {
@@ -33,7 +33,7 @@ async function create(req, res) {
     }
 
     req.body.userId = req.user._id
-    
+
     try {
         await Routine.create(req.body)
     } catch (err) {

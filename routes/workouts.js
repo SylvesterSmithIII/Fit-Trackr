@@ -1,15 +1,16 @@
 const express = require('express')
 const router = express.Router()
 const workoutCtrl = require('../controllers/workouts')
+const ensureLoggedIn = require('../config/ensureLoggedIn')
 
-router.get('/', workoutCtrl.index)
+router.get('/', ensureLoggedIn, workoutCtrl.index)
 
-router.post('/', workoutCtrl.create)
+router.post('/', ensureLoggedIn, workoutCtrl.create)
 
-router.get('/:id/edit', workoutCtrl.show)
+router.get('/:id/edit', ensureLoggedIn, workoutCtrl.show)
 
-router.put('/:id/edit', workoutCtrl.edit)
+router.put('/:id/edit', ensureLoggedIn, workoutCtrl.edit)
 
-router.delete('/:id', workoutCtrl.delete)
+router.delete('/:id', ensureLoggedIn, workoutCtrl.delete)
 
 module.exports = router
