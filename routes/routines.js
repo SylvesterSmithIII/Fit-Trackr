@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const routineCtrl = require('../controllers/routines')
 
-router.get('/', routineCtrl.show)
+router.get('/', routineCtrl.index)
 
 router.get('/new', routineCtrl.new)
 

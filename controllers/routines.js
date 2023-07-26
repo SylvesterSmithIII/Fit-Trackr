@@ -3,17 +3,16 @@ const Routine = require('../models/routine')
 
 
 module.exports = {
-    show,
+    index,
     new: newRoutine,
     create
 };
 
-async function show(req, res) {
+async function index(req, res) {
     let currentUser
     let routines
     try {
-        currentUser = await User.findOne( { googleId: res.locals.user.googleId } )
-        routines = await Routine.find( { userId: currentUser.googleId } )
+        routines = await Routine.find( { userId: req.user._id } )
     } catch (err) {
         console.log(err)
     }
@@ -21,32 +20,20 @@ async function show(req, res) {
 }
 
 async function newRoutine(req, res) {
-    let currentUser
-    try {
-        currentUser = await User.findOne( { googleId: res.locals.user.googleId } )
-    } catch (err) {
-        console.log(err)
-    }
-    res.render('routines/new', { title: "Create Routine", workouts: currentUser.workouts })
+    res.render('routines/new', { title: "Create Routine", workouts: req.user.workouts })
 }
 
 async function create(req, res) {
-    let currentUser
     let routines
+
     try {
-        currentUser = await User.findOne( { googleId: res.locals.user.googleId } )
-
-        try {
-            routines = await Routine.find( { userId: currentUser._id } )
-        } catch (err) {
-            console.log(err)
-        }
-
+        routines = await Routine.find( { userId: req.user._id } )
     } catch (err) {
         console.log(err)
     }
 
-    req.body.userId = res.locals.user.googleId
+    req.body.userId = req.user._id
+    
     try {
         await Routine.create(req.body)
     } catch (err) {

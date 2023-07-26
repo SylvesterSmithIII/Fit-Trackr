@@ -1,5 +1,42 @@
 <%- include('../partials/header') %>
 
-<%= workout %>
+<form action="/workouts/<%= workout._id %>/edit?_method=PUT" method="POST">
+    <p>Name: <%= workout.name %></p>
+    <label for="name">Edit Name</label>
+    <input type="text" name="name">
+    <p>Sets: <%= workout.sets %></p>
+    <label for="sets">Edit Sets</label>
+    <input type="text" name="sets" min="1">
+    <p>Reps: <%= workout.reps %></p>
+    <input type="text" name="reps" min="1">
+    <% if (workout["description"] !== "") { %>
+    <p>Description:<br> <%= workout.description %></p>
+    <label for="description">Edit Description</label>
+    <input type="text" name="description">
+    <% } %>
+    <% if (workout["equipment"] !== "") { %>
+        <p>Equipment:<br> <%= workout.equipment %></p>
+        <label for="equipment">Edit Equipment</label>
+        <input type="text" name="equipment">
+
+    <% } %>
+    <% if (workout["muscle_group"] !== "") { %>
+        <p>Muscle Group:<br> <%= workout.muscle_group %></p>
+        <label for="muscle_group">Edit Muscle Group</label>
+        <input type="text" name="muscle_group">
+
+    <% } %>
+    <% if (workout["level"] !== "") { %>
+        <p>Level:<br> <%= workout.level %></p>
+        <label for="level">Edit Level</label>
+        <input type="text" name="level">
+    <% } %>
+    <br>
+    <input type="submit" value="Save Edits">
+</form>
+
+<form action="/workouts/<%= workout._id %>?_method=DELETE" method="POST">
+    <input type="submit" value="Delete Workout?">
+</form>
 
 <%- include('../partials/footer') %>

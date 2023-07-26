@@ -6,26 +6,30 @@
     <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon">
   </head>
   <body>
-    <header>
-        <h2><%= title %></h2>
-        <nav>
-            <a href="/">Home</a>
-            |
-            <a href="/auth/google">Login</a>
+    <header class="header">
+        <% if (user) { %>
+          <img src="<%= user.avatar %>" alt="user picture" class="avatar">
+        <% } %>
+        <h2>Fit Trackr</h2>
+        <nav class="nav_links">
+
+          <ul>
+
+            <li><a href="/">Home</a></li>
 
             <% if (user) { %>
-            |
-            <a href="/routines">Go to Routines</a>
-            |
-            <a href="/logout">Logout</a>
-            <% } else {%>
-            
-            <% } %>
 
-            <!-- if user logged in display name -->
-            <% if (user) { %>
-            <h4>Hello <%= user.name %></h4>
-            <% } %>
+              <li><a href="/routines">Go to Routines</a></li>
+
+              <li><a href="/logout">Logout</a></li>
+              <% } else {%>
+
+              <li><a href="/auth/google">Login</a></li>
+              
+              <% } %>
+
+          </ul>
+
         </nav>
       </header>
     <h1><%= title %></h1>
