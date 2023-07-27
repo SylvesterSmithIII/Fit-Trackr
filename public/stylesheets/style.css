@@ -65,6 +65,7 @@ header {
 
 .container {
   display: flex;
+  flex-direction: column;
   border: 5px solid white;
   background-color: #222222;
   margin: 0 10%;
@@ -74,17 +75,121 @@ header {
 form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
-.name_label {
+form > p {
+  display: inline;
+  font-size: 2rem;
+  letter-spacing: 4rem;
+}
 
+.name_label {
+  font-size: 2rem;
 }
 
 .name_input {
   margin-left: 1rem;
+  height: 75%;
+  padding: auto 0;
+  text-align: center;
 }
 
 .add_label {
+  font-size: 2rem;
+}
+
+.workouts {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
 
 }
+
+.workout_child {
+  border: 2px solid black;
+  flex-basis: 20%;
+  aspect-ratio: 1;
+  padding: 2rem;
+  font-size: 1.5rem;
+  text-align: center;
+  background-color: #353535;
+}
+
+.active {
+  background-color: #2e5984;
+}
+
+.workout_child:hover {
+  background-color: #292929;
+  cursor: pointer;
+}
+
+.workout_child:active {
+  background-color: #244d72;
+}
+
+.active:hover {
+  background-color: #27517a;
+}
+
+.workout_child > h6 {
+  font-size: 1em;
+}
+
+.workout_child > p {
+  align-self: baseline;
+  font-size: 0.75em;
+}
+
+.to_workouts {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.to_workouts > a {
+  color: #edf0f1;
+  text-decoration: none;
+  font-size: 2rem;
+}
+
+.link {
+  transition: all 0.3s ease 0s;
+}
+
+.link:hover {
+  color: #aa0000;
+}
+
+.submit_button {
+  margin-top: 1rem;
+
+}
+
+.submit_button {
+  background-color: #353535; 
+  color: #fff; 
+  border: none; 
+  padding: 10px 20px;
+  font-size: 1rem; 
+  cursor: pointer; 
+}
+
+/* Styling the button on hover */
+.submit_button:hover {
+  background-color: #292929; 
+
+}
+
+
+.submit_button:active {
+  background-color: #292929; 
+
+}
+/* use % for the font sizes */
+/* set the height and width */

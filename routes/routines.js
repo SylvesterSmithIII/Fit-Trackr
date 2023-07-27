@@ -12,6 +12,6 @@ router.post('/create', ensureLoggedIn, routineCtrl.create)
 
 router.get('/:id', ensureLoggedIn, routineCtrl.show)
 
-router.delete('/:id', routineCtrl.delete)
+router.delete('/:id', ensureLoggedIn, routineCtrl.delete)
 
 module.exports = router

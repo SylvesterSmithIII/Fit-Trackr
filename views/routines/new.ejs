@@ -4,24 +4,70 @@
     <!-- if (workouts.length)  -->
     <div class="container">
 
-        <form action="/routines/create" method="POST">
+        <form action="/routines/create" method="POST" id="form">
 
             
             <label class="name_label" for="name">Routine Name:<input class="name_input" type="text" name="routineName" required></label>
-            <label class="add_label" for="routines">Select Routines To Add:</label>
-            <select name="workouts" id="workouts" required multiple>
-
+            <label class="add_label" for="routines">Select Routines To Add</label>
+            <p>&#8595; &#8595; &#8595;</p>
+            <div class="workouts">
                 <% workouts.forEach(w => { %>
-                    <option value="<%= w._id %>"><%= w.name %></option>
-                <% }) %>
+                    <input type="checkbox" name="workouts" id="<%= w._id %>" value="<%= w._id %>" hidden>
+                    <div class="workout_child" id="<%= w._id %>">
+                     <h6><%= w.name %></h6>
+                     <p><%= w.sets %>x<%= w.reps %></p>
+                    </div>
+                    
+                 <% }) %>
+            </div>
+                
 
-            </select>
+
             
-            <input type="submit" value="Submit">
+            <input class="submit_button" type="submit" value="Create Routine">
+            
         </form>
-
+        
     </div>
 
-    <a href="/workouts">Add Workout</a>
+    <div class="to_workouts"><a class="link" href="/workouts">Add A New Workout</a></div>
+
+   
+
+    <script>
+        const workouts = document.querySelectorAll('.workout_child');
+
+        workouts.forEach(workout => {
+            workout.addEventListener('click', () => {
+                const checkbox = document.getElementById(workout.id)
+                if (checkbox.checked === false) {
+                    workout.classList.add('active')
+                    checkbox.checked = true
+                } else {
+                    workout.classList.remove('active')
+                    checkbox.checked = false
+                }
+            } )
+        })
+
+        const form = document.getElementById('form')
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]')
+
+        form.addEventListener('submit', function(event) {
+        let isAtLeastOneChecked = false
+
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+            isAtLeastOneChecked = true
+            }
+        });
+
+        if (!isAtLeastOneChecked) {
+            // to stop form from submitting
+            event.preventDefault()
+            alert('Please select at least one checkbox before submitting.')
+        }
+        });
+      </script>
 
 <%- include('../partials/footer') %>
