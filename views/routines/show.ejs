@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+
+<div>
+    <h3><%= routine.routineName %></h3>
+    <% routine.workouts.forEach(w => { %>
+        <p><%= w.name %></p>
+        <p><%= w.sets %></p>
+        <p><%= w.reps %></p>
+        <p><%= w["description"] %></p>
+        <p><%= w["muscle_group"] %></p>
+        <p><%= w["level"] %></p>
+        <p><%= w["equipment"] %></p>
+    <% }) %>
+    <form action="/routines/<%= routine._id %>?_method=DELETE" method="POST">
+        <input type="submit" value="Delete Routine">
+    </form>
+
+</div>
+
+<%- include('../partials/footer') %>

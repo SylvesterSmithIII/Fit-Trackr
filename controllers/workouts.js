@@ -1,5 +1,5 @@
 const User = require('../models/user');
-
+const Workout = require('../models/workout')
 const Sample_Workout = require('../models/sample_workouts')
 
 
@@ -12,24 +12,37 @@ module.exports = {
 };
 
 async function index(req, res) {
-
+    let user
     let sample_workouts
 
+    try {
+        user = await User.findOne({ googleId: req.user.googleId }).populate('workouts')
+    } catch (err) {
+        console.log(err)
+    }
+    console.log(user)
     if (req.query.name === "") delete req.query.name
     try {
         sample_workouts = await Sample_Workout.find(req.query)
     } catch (err) {
         console.log(err);
     }
-    res.render('workouts/index', { title: "Workouts", workouts: req.user.workouts, sample_workouts })
+    res.render('workouts/index', { title: "Workouts", workouts: user.workouts, sample_workouts })
 }
 
 async function create(req, res) {
 
+    const newWorkout = new Workout(req.body)
+    let savedWorkout
+    try {
+        savedWorkout = await newWorkout.save()
+    } catch (err) {
+        console.log(err);
+    }
     try {
         const user = await User.findOne( { _id: req.user._id } )
         try {
-            user.workouts.push(req.body)
+            user.workouts.push(savedWorkout._id)
             await user.save()
         } catch (err) {
             console.log(err)
@@ -42,17 +55,24 @@ async function create(req, res) {
 
 async function show(req, res) {
 
-    const workout = req.user.workouts.find(w => w._id == req.params.id)
+    let workout
+
+    try {
+        workout = await Workout.findById(req.params.id)
+        
+    } catch (err) {
+        console.log(err);
+    }
 
     res.render('workouts/edit', { title: `Edit ${workout.name}`, workout})
 }
 
 async function edit(req, res) {
-    let currentUser
     let workout
+
     try {
-        currentUser = await User.findOne( { _id: req.user._id })
-        workout = currentUser.workouts.find(w => w._id == req.params.id)
+        workout = await Workout.findById(req.params.id)
+        
     } catch (err) {
         console.log(err);
     }
@@ -66,7 +86,7 @@ async function edit(req, res) {
     }
 
     try {
-        await currentUser.save()
+        await workout.save()
     } catch (err) {
         console.log(err);
     }
@@ -82,8 +102,9 @@ async function deleteOne(req, res) {
         console.log(err);
     }
 
-    const workoutIdx = currentUser.workouts.findIndex(w => w._id == req.params.id)
+    const workoutIdx = currentUser.workouts.findIndex(w => w == req.params.id)
     currentUser.workouts.splice(workoutIdx, 1)
+    await Workout.findByIdAndDelete(req.params.id)
 
     try {
         await currentUser.save()
