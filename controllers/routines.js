@@ -1,5 +1,5 @@
-const User = require('../models/user');
 const Routine = require('../models/routine')
+const User = require('../models/user');
 
 
 module.exports = {
@@ -9,14 +9,18 @@ module.exports = {
 };
 
 async function index(req, res) {
-    let currentUser
     let routines
     try {
-        routines = await Routine.find( { userId: req.user._id } )
+        routines = await Routine.find( { userId: req.user._id } ).populate('workouts')
     } catch (err) {
         console.log(err)
     }
-    res.render('routines/show', { title: "Routines", currentUser, routines })
+    console.log("there are the routines", routines)
+    // routines.forEach(r => {
+    //     console.log(r.workouts)
+        
+    // })
+    res.render('routines/index', { title: "Routines", routines })
 }
 
 async function newRoutine(req, res) {

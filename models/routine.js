@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const User = require('./user')
-const Workout = require('./workout')
 const Schema = mongoose.Schema
 
 const routineSchema = new Schema({

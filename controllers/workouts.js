@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const Workout = require('../models/workout');
+
 const Sample_Workout = require('../models/sample_workouts')
 
 
@@ -21,7 +21,7 @@ async function index(req, res) {
     } catch (err) {
         console.log(err);
     }
-    res.render('workouts/show', { title: "Workouts", workouts: req.user.workouts, sample_workouts })
+    res.render('workouts/index', { title: "Workouts", workouts: req.user.workouts, sample_workouts })
 }
 
 async function create(req, res) {

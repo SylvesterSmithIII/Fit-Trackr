@@ -6,7 +6,13 @@
 
         <% routines.forEach(routine => { %>
            <div>
-            <p># of Workouts <%= routine.workouts.length %></p>
+            <h1><%= routine.routineName %></h1>
+            <% routine.workouts.forEach(w => { %>
+                <div>
+                    <h3><%= w.name %></h3>
+                    <p><%= w.sets %>x<%= w.reps %></p>
+                </div>
+            <% }) %>
            </div>
         <% }) %>
 

@@ -9,6 +9,4 @@ const sample_WorkoutSchema = new Schema({
     level: String
   })
 
-
-
 module.exports = mongoose.model('Sample_Workout', sample_WorkoutSchema)
