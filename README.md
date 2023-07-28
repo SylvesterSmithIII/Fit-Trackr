@@ -17,8 +17,9 @@ Welcome to Fit Trackr, where you are the architect of your fitness journey. Our 
 
 ![Workouts Page](./public/images/workouts.png)
 
+## ERD
 
-
+![ERD](./public/images/erd.png)
 
 ## Technologies Used
 - Node.js
