@@ -23,7 +23,7 @@ async function index(req, res) {
     console.log(user)
     if (req.query.name === "") delete req.query.name
     try {
-        sample_workouts = await Sample_Workout.find(req.query)
+        sample_workouts = await Sample_Workout.find(req.query).limit(60)
     } catch (err) {
         console.log(err);
     }
