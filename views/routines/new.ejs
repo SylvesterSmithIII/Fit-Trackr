@@ -4,16 +4,16 @@
     <!-- if (workouts.length)  -->
     <div class="container">
 
-        <form action="/routines/create" method="POST" id="form">
+        <form class="routine_form" action="/routines/create" method="POST" id="form">
 
             
             <label class="name_label" for="name">Routine Name:<input class="name_input" type="text" name="routineName" required></label>
             <label class="add_label" for="routines">Select Routines To Add</label>
-            <p>&#8595; &#8595; &#8595;</p>
+            <p class="pointers">&#8595; &#8595; &#8595;</p>
             <div class="workouts">
                 <% workouts.forEach(w => { %>
                     <input type="checkbox" name="workouts" id="<%= w._id %>" value="<%= w._id %>" hidden>
-                    <div class="workout_child" id="<%= w._id %>">
+                    <div class="workout_child square" id="<%= w._id %>">
                      <h6><%= w.name %></h6>
                      <p><%= w.sets %>x<%= w.reps %></p>
                     </div>
@@ -30,7 +30,7 @@
         
     </div>
 
-    <div class="to_workouts"><a class="link" href="/workouts">Add A New Workout</a></div>
+    <div class="to_workouts"><a class="link" href="/workouts">-Add A New Workout-</a></div>
 
    
 

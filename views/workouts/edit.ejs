@@ -1,42 +1,61 @@
 <%- include('../partials/header') %>
 
-<form action="/workouts/<%= workout._id %>/edit?_method=PUT" method="POST">
-    <p>Name: <%= workout.name %></p>
-    <label for="name">Edit Name</label>
-    <input type="text" name="name">
-    <p>Sets: <%= workout.sets %></p>
-    <label for="sets">Edit Sets</label>
-    <input type="text" name="sets" min="1">
-    <p>Reps: <%= workout.reps %></p>
-    <input type="text" name="reps" min="1">
-    <% if (workout["description"] !== "") { %>
-    <p>Description:<br> <%= workout.description %></p>
-    <label for="description">Edit Description</label>
-    <input type="text" name="description">
-    <% } %>
-    <% if (workout["equipment"] !== "") { %>
-        <p>Equipment:<br> <%= workout.equipment %></p>
-        <label for="equipment">Edit Equipment</label>
-        <input type="text" name="equipment">
+<div class="container">
+    <form class="edit_form" action="/workouts/<%= workout._id %>/edit?_method=PUT" method="POST">
+        <p>Name: <%= workout.name %></p>
+        <input type="text" name="name">
+        <p>Sets: <%= workout.sets %></p>
+        <input type="text" name="sets" min="1">
+        <p>Reps: <%= workout.reps %></p>
+        <input type="text" name="reps" min="1">
+            <p>Weight:<br> <%= workout.weight %></p>
+            <input type="text" name="weight">
 
-    <% } %>
-    <% if (workout["muscle_group"] !== "") { %>
-        <p>Muscle Group:<br> <%= workout.muscle_group %></p>
-        <label for="muscle_group">Edit Muscle Group</label>
-        <input type="text" name="muscle_group">
+            <p>Description:<br> <%= workout.description %></p>
+            <input type="text" name="description">
 
-    <% } %>
-    <% if (workout["level"] !== "") { %>
-        <p>Level:<br> <%= workout.level %></p>
-        <label for="level">Edit Level</label>
-        <input type="text" name="level">
-    <% } %>
-    <br>
-    <input type="submit" value="Save Edits">
+            <p>Equipment:<br> <%= workout.equipment %></p>
+            <input type="text" name="equipment">
+
+            <p>Muscle Group:<br> <%= workout.muscle_group %></p>
+            <input type="text" name="muscle_group">
+
+            <p>Level:<br> <%= workout.level %></p>
+            <input type="text" name="level">
+
+        <br>
+        <input class="submit_button center flex-basis" type="submit" value="Save Edits">
+    </form>
+
+</div>
+<form id="delete" class="center2" action="/workouts/<%= workout._id %>?_method=DELETE" method="POST">
+    <input id="delete_button" class="delete_button" type="submit" value="Delete Workout?">
 </form>
 
-<form action="/workouts/<%= workout._id %>?_method=DELETE" method="POST">
-    <input type="submit" value="Delete Workout?">
-</form>
+<script>
+    const deleteButton = document.getElementById('delete_button')
+let clickCount = 0
+let timer
+const orininalText = deleteButton.value
+
+deleteButton.addEventListener('click', (event) => {
+    event.preventDefault() // Prevent the default form submission behavior
+
+    clickCount++
+  
+
+    if (clickCount === 1) {
+    // Set a timer to wait for the second click
+    deleteButton.value = "Are You Sure...?"
+    timer = setTimeout(() => {
+        clickCount = 0
+        deleteButton.value = orininalText
+
+    }, 3000)
+    } else if (clickCount === 2) {
+    document.getElementById('delete').submit();
+  }
+})
+</script>
 
 <%- include('../partials/footer') %>

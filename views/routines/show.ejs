@@ -1,20 +1,50 @@
 <%- include('../partials/header') %>
 
-<div>
-    <h3><%= routine.routineName %></h3>
+<div class="container">
+    <div class="routine_show">
     <% routine.workouts.forEach(w => { %>
-        <p><%= w.name %></p>
-        <p><%= w.sets %></p>
-        <p><%= w.reps %></p>
-        <p><%= w["description"] %></p>
-        <p><%= w["muscle_group"] %></p>
-        <p><%= w["level"] %></p>
-        <p><%= w["equipment"] %></p>
+        <div class="routine_child">
+            <h2><%= w.name %></h2>
+            <p><%= w.sets %>x<%= w.reps %></p>
+            <p><%= w["weight"] %></p>
+            <p><%= w["description"] %></p>
+            <p><%= w["muscle_group"] %></p>
+            <p><%= w["level"] %></p>
+            <p><%= w["equipment"] %></p>
+            <a class="link" href="/workouts/<%= w._id %>/edit">-Edit <%= w.name %>-</a>
+        </div>
     <% }) %>
-    <form action="/routines/<%= routine._id %>?_method=DELETE" method="POST">
-        <input type="submit" value="Delete Routine">
-    </form>
-
+    
+</div>
 </div>
 
+<form id="delete" class="center2" action="/routines/<%= routine._id %>?_method=DELETE" method="POST">
+    <input id="delete_button" class="delete_button" type="submit" value="Delete Routine?">
+</form>
+
+<script>
+    const deleteButton = document.getElementById('delete_button')
+let clickCount = 0
+let timer
+const orininalText = deleteButton.value
+
+deleteButton.addEventListener('click', (event) => {
+    event.preventDefault() // Prevent the default form submission behavior
+
+    clickCount++
+  
+
+    if (clickCount === 1) {
+    // Set a timer to wait for the second click
+    deleteButton.value = "Are You Sure...?"
+    timer = setTimeout(() => {
+        clickCount = 0
+        deleteButton.value = orininalText
+
+    }, 3000)
+    } else if (clickCount === 2) {
+    document.getElementById('delete').submit();
+  }
+})
+</script>
 <%- include('../partials/footer') %>

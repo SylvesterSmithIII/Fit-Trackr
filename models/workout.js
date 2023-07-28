@@ -14,11 +14,11 @@ const workoutSchema = new Schema({
         type: Number,
         required: true
     },
+    weight: String,
     description: String,
     muscle_group: String,
     equipment: String,
-    level: String,
-    photos: [String]
+    level: String
 })
 
 module.exports = mongoose.model('Workout', workoutSchema)

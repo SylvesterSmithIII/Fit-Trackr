@@ -2,17 +2,28 @@
 
     <!-- check if any available workouts -->
     <div class="container">
-        <div class="workouts">
+        <div class="workouts column">
         <% if (workouts.length) { %>
             <% workouts.forEach(w => { %>
-                <div class="workout_child">
-                    <p><%= w.name %></p>
-                    <p><%= w.sets %></p>
-                    <p><%= w.reps %></p>
-                    <% if (w.description !== "") { %>
+                <div class="workout_child workouts_show">
+                    <h2><%= w.name %></h2>
+                    <p><%= w.sets %>x<%= w.reps %></p>
+                    <% if (w["weight"] !== "") { %>
+                        <p><%= w.weight %></p>
+                    <% } %>
+                    <% if (w["description"] !== "") { %>
                         <p><%= w.description %></p>
                     <% } %>
-                    <a href="/workouts/<%= w._id %>/edit">Edit <%= w.name %></a>
+                    <% if (w["equipment"] !== "") { %>
+                        <p><%= w.equipment %></p>
+                    <% } %>
+                    <% if (w["muscle_group"] !== "") { %>
+                        <p><%= w.muscle_group %></p>
+                    <% } %>
+                    <% if (w["level"] !== "") { %>
+                        <p><%= w.level %></p>
+                    <% } %>
+                    <a class="link" href="/workouts/<%= w._id %>/edit">-Edit <%= w.name %>-</a>
                 </div>
             <% }) %>
         </div>
@@ -21,9 +32,9 @@
         <% } %>
         
     </div>
-    <br><br><br><br>
+    <br><br><br>
     <div class="container">
-        <form action="/workouts" method="POST">
+        <form class="add_workout" action="/workouts" method="POST">
 
             <label for="name">Name:</label>
             <input type="text" name="name" required>
@@ -34,97 +45,118 @@
             <label for="reps">Reps:</label>
             <input type="number" name="reps" min="1" required>
 
+            <label for="weight">Weight:</label>
+            <input type="text" name="weight">
+
+            <label for="equipment">Equipment:</label>
+            <input type="text" name="equipment">
+
+            <label for="muscle_group">Muscle Gorup:</label>
+            <input type="text" name="muscle_group">
+
+            <label for="level">Level:</label>
+            <input type="text" name="level">
+
             <label for="description">Description:</label>
             <input type="text" name="description">
 
-            <input type="submit" value="Submit">
+            <input class="submit_button center" type="submit" value="Submit">
 
-        </form>
-
-        <br><br>
-        <form action="/workouts" method="GET">
-
-            <label for="name">Name:</label>
-            <input type="text" name="name">
-
-            <label for="muscle_group">Muscle Group:</label>
-            <select name="muscle_group" multiple>
-                <option value="" disabled selected>Select One</option>
-                <option value="Abdominals">Abdominals</option>
-                <option value="Abductors">Abductors</option>
-                <option value="Adductors">Adductors</option>
-                <option value="Biceps">Biceps</option>
-                <option value="Calves">Calves</option>
-                <option value="Chest">Chest</option>
-                <option value="Forearms">Forearms</option>
-                <option value="Glutes">Glutes</option>
-                <option value="Hamstrings">Hamstrings</option>
-                <option value="Lower Back">Lower Back</option>
-                <option value="Middle Back">Middle Back</option>
-                <option value="Traps">Traps</option>
-                <option value="Quadriceps">Quadriceps</option>
-                <option value="Shoulders">Shoulders</option>
-                <option value="Triceps">Triceps</option>
-                <option value=""></option>
-            </select>
-
-            <label for="equipment">Equipment:</label>
-            <select name="equipment" multiple>
-                <option value="" disabled selected>Select One</option>
-                <option value="Bands">Bands</option>
-                <option value="Barbell">Barbell</option>
-                <option value="Kettlebells">Kettlebells</option>
-                <option value="Dumbbell">Dumbbell</option>
-                <option value="Cable">Cable</option>
-                <option value="Machine">Machine</option>
-                <option value="Body Only">Body Only</option>
-                <option value="Medicine Ball">Medicine Ball</option>
-                <option value="Exercise Ball">Exercise Ball</option>
-                <option value="Foam Roll">Foam Roll</option>
-                <option value="E-Z Curl Bar">E-Z Curl Bar</option>
-                <option value="None">None</option>
-                <option value="Other">Other</option>
-            </select>
-
-            <label for="level">Level:</label>
-            <select name="level" multiple>
-                <option value="" disabled selected>Select One</option>
-                <option value="Beginner">Beginner</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Expert">Expert</option>
-            </select>
-
-            <input type="submit" value="Filter Results">
         </form>
     </div>
-    <% sample_workouts?.forEach(w => { %>
+    <br><br><br>
+        <div class="container">
+            <form class="filter" action="/workouts" method="GET">
 
-        <form action="/workouts" method="POST" style="border: 1px solid black;">
+                <label for="name">Name:</label>
+                <input type="text" name="name">
+
+                <label for="muscle_group">Muscle Group:</label>
+                <select name="muscle_group" multiple>
+                    <option value="" disabled selected>Select One</option>
+                    <option value="Abdominals">Abdominals</option>
+                    <option value="Abductors">Abductors</option>
+                    <option value="Adductors">Adductors</option>
+                    <option value="Biceps">Biceps</option>
+                    <option value="Calves">Calves</option>
+                    <option value="Chest">Chest</option>
+                    <option value="Forearms">Forearms</option>
+                    <option value="Glutes">Glutes</option>
+                    <option value="Hamstrings">Hamstrings</option>
+                    <option value="Lower Back">Lower Back</option>
+                    <option value="Middle Back">Middle Back</option>
+                    <option value="Traps">Traps</option>
+                    <option value="Quadriceps">Quadriceps</option>
+                    <option value="Shoulders">Shoulders</option>
+                    <option value="Triceps">Triceps</option>
+                    <option value=""></option>
+                </select>
+
+                <label for="equipment">Equipment:</label>
+                <select name="equipment" multiple>
+                    <option value="" disabled selected>Select One</option>
+                    <option value="Bands">Bands</option>
+                    <option value="Barbell">Barbell</option>
+                    <option value="Kettlebells">Kettlebells</option>
+                    <option value="Dumbbell">Dumbbell</option>
+                    <option value="Cable">Cable</option>
+                    <option value="Machine">Machine</option>
+                    <option value="Body Only">Body Only</option>
+                    <option value="Medicine Ball">Medicine Ball</option>
+                    <option value="Exercise Ball">Exercise Ball</option>
+                    <option value="Foam Roll">Foam Roll</option>
+                    <option value="E-Z Curl Bar">E-Z Curl Bar</option>
+                    <option value="None">None</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="level">Level:</label>
+                <select name="level" multiple>
+                    <option value="" disabled selected>Select One</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Expert">Expert</option>
+                </select>
+
+                <input class="submit_button center flex-basis" type="submit" value="Filter Results">
+            </form>
+        </div>
+        <br>
+    <% sample_workouts?.forEach(w => { %>
+        <div class="container">
+        <form action="/workouts" method="POST">
             <input type="hidden" name="name" value="<%= w.name %>" readonly>
-            <label for=""><%= w.name %></label>
+            <h2 for=""><%= w.name %></h2>
             <br>
             <input type="hidden" name="description" value="<%= w.description %>" readonly>
             <label for=""><%= w.description %></label>
-<br>
+
 
 
             <input type="hidden" name="muscle_group" value="<%= w.muscle_group %>" readonly>
             <label for=""><%= w.muscle_group %></label>
-        <br>
+
             <input type="hidden" name="equipment" value="<%= w.equipment %>" readonly>
             <label for=""><%= w.equipment %></label>
-<br>
+
             <input type="hidden" name="level" value="<%= w.level %>" readonly>
             <label for=""><%= w.level %></label>
-<br>
-            <label for="sets">Sets:</label>
-            <input type="number" name="sets" min="1" required>
-    <br>
-            <label for="reps">Reps:</label>
-            <input type="number" name="reps" min="1" required>
-<br>
-            <input type="submit" value="Add to Workouts">
+
+            <div class="sample_form">
+                <label for="sets">Sets:</label>
+                <input type="number" name="sets" min="1" required>
+
+                <label for="reps">Reps:</label>
+                <input type="number" name="reps" min="1" required>
+
+                <label for="weight">Weight:</label>
+                <input type="text" name="weight">
+
+                <input class="submit_button center flex-basis" type="submit" value="Add to Workouts">
+            </div>
         </form>
+    </div>
+    <br>
 
     <% }) %>
 

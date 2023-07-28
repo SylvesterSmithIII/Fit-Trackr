@@ -1,10 +1,68 @@
-<%- include('./partials/header') %>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae sed quasi itaque, at, earum deleniti, recusandae possimus natus dignissimos fugiat repellat explicabo fugit nam impedit accusamus. Voluptas expedita officia iste!
-    Neque, explicabo voluptas et dolorum suscipit maiores dignissimos velit fuga accusantium. Aut sit deleniti minima sunt rem consectetur quaerat cum tempore maiores velit, reiciendis enim consequatur, adipisci aperiam modi. Enim.
-    Praesentium iste porro similique! Nisi, error quia. Obcaecati nisi ducimus reiciendis eaque dicta commodi earum id nobis? Cumque eum pariatur iure rem blanditiis amet quasi quia cum repellendus, aperiam veniam?
-    Laudantium rem, repellendus temporibus quod hic aliquam molestias quis ducimus ea in porro autem repellat tenetur adipisci. Rerum voluptatibus ut fugiat aspernatur repudiandae, beatae explicabo aliquam consectetur iste assumenda dolores.
-    Impedit voluptate quos voluptatem corporis ea iusto quas placeat sint odio mollitia est repudiandae, aperiam, corrupti cumque tenetur provident, molestiae ducimus alias natus a! Atque quidem vitae laborum laudantium rerum.
-    Deleniti maxime explicabo eum reiciendis eaque natus ipsa esse non accusantium aliquam eos fugiat perspiciatis ullam necessitatibus numquam pariatur, error, saepe iusto molestiae nihil illum suscipit dolores? Hic, reiciendis error!</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fit Trackr</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+  </head>
+    <body>
 
-    <img src="/images/logo.png" alt="Fit Trackr Logo">
-<%- include('./partials/footer') %>
+        <header class="header">
+            <% if (user) { %>
+            <img src="<%= user.avatar %>" alt="user picture" class="avatar">
+            <% } %>
+            <h1>Fit Trackr</h1>
+            <nav class="nav_links">
+
+            <ul>
+
+                <li><a href="/">Home</a></li>
+
+                <% if (user) { %>
+
+                <li><a href="/routines">Go to Routines</a></li>
+
+                <li><a href="/logout">Logout</a></li>
+                <% } else {%>
+
+                <li><a href="/auth/google">Login</a></li>
+                
+                <% } %>
+
+            </ul>
+
+            </nav>
+        </header>
+
+        <h1 class="title">Welcome to <span>Fit Trackr!</span></h1>
+        <div class="home-page">
+        <div class="container">
+            <p >At Fit Trackr, we believe that every fitness journey is unique, and that's why we've created a platform that empowers fitness enthusiasts like you to take control of your workouts and routines. Whether you're a seasoned gym-goer or just starting, Fit Trackr is your go-to destination for creating personalized fitness plans that align perfectly with your goals and preferences.</p>
+        </div>
+
+        <div class="container">
+            <p>&#149; Personalization at its Best: Fit Trackr is all about YOU. Create workouts and routines tailored to your fitness objectives and stay motivated with customized exercise selections.</p>
+            <p>&#149; Flexibility and Freedom: With Fit Trackr, you're the boss. Design workouts that suit your schedule, fitness level, and available equipment, giving you the freedom to exercise on your terms.</p>
+        </div>
+
+        <h1 class="workouts_link"><a class="link" href="/workouts">-Create A Workout!-</a></h1>
+
+        <div class="container">
+            <h2>Empowering Fitness Enthusiasts:</h2>
+            <p>Welcome to Fit Trackr, where you are the architect of your fitness journey. Our platform empowers fitness enthusiasts like you to craft personalized workouts and routines that are as unique as your goals. No more cookie-cutter fitness plans - take control and let your creativity thrive!</p>
+            <br>
+            <p>We understand that everyone's fitness journey is different, and that's why we provides you with the tools to design workouts that perfectly align with your preferences and needs. Whether you prefer high-intensity interval training or strength training with weights, our platform gives you the flexibility to choose what works best for you.</p>
+        </div>
+        <div class="container">
+            <h2>Customizable Workouts:</h2>
+            <p>Unleash your creativity with Fit Trackr's customizable workouts! It's simple - just select from a wide range of exercises, sets, reps, and other parameters to design your dream workout. Whether you're into bodyweight exercises or prefer to pump iron, our extensive exercise library has something for everyone.</p>
+            <br>
+            <p>We cater to fitness enthusiasts of all levels, from beginners to seasoned pros. No matter where you are on your fitness journey, Fit Trackr has a variety of exercises and equipment options to match your interests and help you progress towards your fitness goals.</p>
+        </div>
+    </div>
+
+    </body>
+</html>

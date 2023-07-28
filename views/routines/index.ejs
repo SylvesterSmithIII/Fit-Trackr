@@ -2,30 +2,33 @@
 
 
     <% if (routines.length) { %>
-        <main>
+        
 
-        <% routines.forEach(routine => { %>
-           <div>
-            <h1><%= routine.routineName %></h1>
-            <% routine.workouts.forEach(w => { %>
-                <div>
-                    <h3><%= w.name %></h3>
-                    <p><%= w.sets %>x<%= w.reps %></p>
+            <% routines.forEach(routine => { %>
+
+            <div class="container gap">
+                <h1><%= routine.routineName %></h1>
+                <div class="workouts">
+                    <% routine.workouts.forEach(w => { %>
+                        <div class="workout_child">
+                            <h3><%= w.name %></h3>
+                            <p><%= w.sets %>x<%= w.reps %></p>
+                        </div>
+                    <% }) %>
                 </div>
-            <% }) %>
-            <a href="/routines/<%= routine._id %>">Routine Details</a>
-           </div>
-        <% }) %>
-
-        </main>
-
+                <a class="link" href="/routines/<%= routine._id %>">-Routine Details-</a>
+            </div>
+            <% }) %>  
+        </div>
     <% } else { %>
-
-        <p>No Routines!</p>
+        <div class="container">
+            <h2>No Routines!</h2>
+        </div>
         
 
     <% } %>
 
-    <a href="/routines/new">Create A Routine</a>
+    
+    <h1 class="workouts_link margin"><a class="link" href="/routines/new">-Create A Routine-</a></h1>
 
 <%- include('../partials/footer') %>

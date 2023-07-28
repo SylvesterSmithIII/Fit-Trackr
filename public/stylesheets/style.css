@@ -10,6 +10,7 @@
 body {
   background-color: #353535;
   color: #edf0f1;
+  
 }
 
 li > a {
@@ -66,13 +67,14 @@ header {
 .container {
   display: flex;
   flex-direction: column;
-  border: 5px solid white;
+  border: 5px solid #edf0f1;
   background-color: #222222;
   margin: 0 10%;
   padding: 1rem 2rem;
+  align-items: center;
 }
 
-form {
+.routine_form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -80,7 +82,18 @@ form {
   width: 100%;
 }
 
-form > p {
+.add_workout {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1rem;
+}
+
+.add_workout * {
+  flex-basis: 45%;
+}
+
+.pointers {
   display: inline;
   font-size: 2rem;
   letter-spacing: 4rem;
@@ -103,34 +116,46 @@ form > p {
 
 .workouts {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   width: 90%;
   gap: 1rem;
   justify-content: center;
   align-items: center;
+}
 
+.column {
+  flex-direction: column;
 }
 
 .workout_child {
   border: 2px solid black;
   flex-basis: 20%;
-  aspect-ratio: 1;
   padding: 2rem;
   font-size: 1.5rem;
   text-align: center;
   background-color: #353535;
 }
 
+.workouts_show {
+  width: 100%;
+
+}
+
+.square {
+  aspect-ratio: 1;
+}
+
 .active {
   background-color: #2e5984;
 }
 
-.workout_child:hover {
+.square:hover {
   background-color: #292929;
   cursor: pointer;
 }
 
-.workout_child:active {
+.square:active {
   background-color: #244d72;
 }
 
@@ -152,7 +177,7 @@ form > p {
   margin: 2rem 0;
 }
 
-.to_workouts > a {
+.link {
   color: #edf0f1;
   text-decoration: none;
   font-size: 2rem;
@@ -173,7 +198,7 @@ form > p {
 
 .submit_button {
   background-color: #353535; 
-  color: #fff; 
+  color: #edf0f1; 
   border: none; 
   padding: 10px 20px;
   font-size: 1rem; 
@@ -190,6 +215,102 @@ form > p {
 .submit_button:active {
   background-color: #292929; 
 
+}
+
+span {
+  color: #aa0000;
+}
+
+.home-page > div{
+  margin-bottom: 1rem;
+}
+
+.workouts_link {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.center {
+  margin-inline: auto;
+}
+
+.filter {
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter * {
+  flex-basis: 20%;
+}
+
+.flex-basis {
+  flex-basis: 50% !important;
+}
+
+.edit_form {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  gap: 1rem;
+}
+
+.edit_form * {
+  flex-basis: 45%;
+}
+
+.delete_button {
+  background-color: #222222;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 2rem;
+  margin-inline: auto;
+  color: #edf0f1;
+
+}
+
+.delete_button:hover {
+  background-color: #aa0000;
+  color: black;
+}
+
+.center2 {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.sample_form {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1rem;
+}
+
+.margin {
+  margin: 1rem 0;
+}
+
+.gap {
+  margin-bottom: 1rem;
+}
+
+.routine_show {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  gap: 1rem;
+}
+
+.routine_child {
+  border: 2px solid black;
+  padding: 2rem;
+  font-size: 1.5rem;
+  text-align: center;
+  background-color: #353535;
 }
 /* use % for the font sizes */
 /* set the height and width */
